@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserTableSeeder::class, //creates users first
             PostTableSeeder::class, //then creates posts each with an assigned user
+            CommentTableSeeder::class,//Comments are created and assigns a user and a post
         ]);
     }
 }
