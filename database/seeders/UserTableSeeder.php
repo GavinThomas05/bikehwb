@@ -10,7 +10,7 @@ class UserTableSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
         //create 50 users
         User::factory(50)->create();

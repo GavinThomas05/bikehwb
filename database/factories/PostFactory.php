@@ -1,16 +1,21 @@
 <?php
 
 namespace Database\Factories;
-use Faker\Generator as Faker;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Post;
+use App\Models\user;
 
-
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
- */
 class PostFactory extends Factory
 {
+
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Post::class;
+
     /**
      * Define the model's default state.
      *
@@ -19,7 +24,12 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            
+            // Assign a random existing user, or create one if none exist
+            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
+            'title' => $this->faker->sentence(),
+            'body' => $this->faker->paragraph(),
+            'image_path' => null, // optional field
+            'category' => $this->faker->randomElement(['trip', 'gear', 'modification', 'motorcycle', 'event']),
         ];
     }
 }

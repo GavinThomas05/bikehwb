@@ -15,17 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserTableSeeder::class);
-
-
-
-        // User::factory(10)->create();
-
-        /*
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            UserTableSeeder::class, //creates users first
+            PostTableSeeder::class, //then creates posts each with an assigned user
         ]);
-        */
     }
 }
