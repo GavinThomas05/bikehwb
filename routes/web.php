@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('home');
@@ -27,4 +28,8 @@ Route::get('/show/{text}', function ($text) {
     return "You entered: " . $text;
     });
 
+// Route to display all posts on the homepage
 Route::get('/', [PostController::class, 'index'])->name('home');
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');

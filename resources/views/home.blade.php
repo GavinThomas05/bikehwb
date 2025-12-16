@@ -15,7 +15,7 @@
 
 <!--Page heading-->
 <h1>Home Page</h1>
-<h2>Feed:</h2>
+<h2>Post Feed:</h2>
 
     @foreach ($posts as $post)
         <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
