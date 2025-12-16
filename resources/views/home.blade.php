@@ -15,7 +15,7 @@
             <button type="button">New Post</button>
         </a>
         <!-- Show logout button -->
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
             @csrf
             <button type="submit">Logout</button>
         </form>
@@ -37,6 +37,20 @@
 
     @foreach ($posts as $post)
         <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+            <!-- Edit/Delete buttons for user -->
+            @auth
+                @if(auth()->id() === $post->user_id)
+                    <a href="{{ route('posts.edit', $post) }}">
+                        <button type="button">Edit</button>
+                    </a>
+
+                    <form action="{{ route('posts.destroy', $post) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                @endif
+            @endauth
             <h2>{{ $post->title }}</h2>
             <p>{{ $post->body }}</p>
             <p><strong>Author:</strong> {{ $post->user->name }}</p>

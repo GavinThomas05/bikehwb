@@ -1,25 +1,37 @@
-<h1>Create Post</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+</head>
+<body>
 
-@if ($errors->any())
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
+    <h1>Create Post</h1>
 
-<form method="POST" action="{{ route('posts.store') }}">
-    @csrf
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
 
-    <div>
-        <label>Title</label><br>
-        <input type="text" name="title">
-    </div>
+    <form method="POST" action="{{ route('posts.store') }}">
+        @csrf
 
-    <div>
-        <label>Body</label><br>
-        <textarea name="body"></textarea>
-    </div>
+        <div>
+            <label>Title</label><br>
+            <input type="text" name="title">
+        </div>
 
-    <button type="submit">Create Post</button>
-</form>
+        <div>
+            <label>Body</label><br>
+            <textarea name="body"></textarea>
+        </div>
+
+        <button type="submit">Create Post</button>
+    </form>
+</body>
+</html> 
+
