@@ -13,6 +13,6 @@ class PostTableSeeder extends Seeder
     public function run(): void
     {
         //create 50 posts each assigned to a random User
-        Post::factory(50)->create();
+        Post::factory(15)->create();
     }
 }

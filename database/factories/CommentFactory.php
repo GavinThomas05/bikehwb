@@ -7,15 +7,11 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
+ */
 class CommentFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Comment::class;
-
     /**
      * Define the model's default state.
      *
@@ -24,11 +20,9 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            // Assign a random existing user or create one if none exist
-            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
-            // Assign a random existing post or create one if none exist
-            'post_id' => Post::inRandomOrder()->first()?->id ?? Post::factory(),
-            'body' => $this->faker->paragraph(),//creates a random fake body text
+            'user_id' => User::inRandomOrder()->value('id')?->id ?? User::factory(),
+            'post_id' => Post::inRandomOrder()->value('id')?->id ?? Post::factory(),
+            'body' => $this->faker->sentence(),       
         ];
     }
 }

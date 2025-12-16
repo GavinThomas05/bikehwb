@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('home');
@@ -25,3 +26,5 @@ Route::get('/redirect', function () {
 Route::get('/show/{text}', function ($text) {
     return "You entered: " . $text;
     });
+
+Route::get('/', [PostController::class, 'index'])->name('home');
