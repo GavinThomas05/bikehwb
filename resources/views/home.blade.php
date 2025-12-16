@@ -8,8 +8,13 @@
 <body>
 <!--Nav bar-->
 <nav>
-    <!-- Show logout button if authenticated, else show login/register links (Signed into a users account)-->
+    <!-- Actions for authenticated users when signed in-->
     @auth
+        <!-- show button to create new post -->
+        <a href="{{ route('posts.create') }}">
+            <button type="button">New Post</button>
+        </a>
+        <!-- Show logout button -->
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Logout</button>
