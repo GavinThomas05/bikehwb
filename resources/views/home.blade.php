@@ -8,10 +8,22 @@
 <body>
 <!--Nav bar-->
 <nav>
-    <a href="/">Home</a>
-    <a href="/post">Post</a>
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
+    <!-- Show logout button if authenticated, else show login/register links (Signed into a users account)-->
+    @auth
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @endauth
+    <!-- Show login/register links if not authenticated (Viewing as a guest) -->
+    @guest
+        <a href="/login">
+            <button type="button">Login</button>
+        </a>
+        <a href="/register">
+            <button type="button">Register</button>
+        </a>
+    @endguest
 </nav>
 
 <!--Page heading-->
