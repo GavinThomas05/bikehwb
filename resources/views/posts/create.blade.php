@@ -26,7 +26,7 @@
         </div>
 
         <div>
-            <label>Body</label><br>
+            <label>Content</label><br>
             <textarea name="body"></textarea>
         </div>
 

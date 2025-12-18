@@ -44,11 +44,7 @@
                         <button type="button">Edit</button>
                     </a>
 
-                    <form action="{{ route('posts.destroy', $post) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Delete</button>
-                    </form>
+                    <!-- ***Delete form moved to withing edit-->
                 @endif
             @endauth
             <h2>{{ $post->title }}</h2>

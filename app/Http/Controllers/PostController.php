@@ -64,15 +64,15 @@ class PostController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'body' => 'required|string',
         ]);
 
         $post->update([
             'title' => $request->title,
-            'content' => $request->content,
+            'body' => $request->body,
         ]);
 
-        return redirect()->route('home')->with('success', 'Post updated successfully.');
+        return redirect('/')->with('success', 'Post updated successfully');
     }
 
     // Handle delete
@@ -84,7 +84,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->route('home')->with('success', 'Post deleted successfully.');
+        return redirect('/')->with('success', 'Post deleted successfully');
     }
 }
 

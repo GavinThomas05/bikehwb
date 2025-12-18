@@ -29,7 +29,12 @@
         <label for="body">Content</label>
         <textarea name="body" id="body" rows="6" required>{{ old('body', $post->body) }}</textarea>
 
-        <button type="submit">Update Post</button>
+        <button type="submit" >Update Post</button>
+    </form>
+    <form action="{{ route('posts.destroy', $post) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit">Delete</button>
     </form>
 </body>
 </html>
