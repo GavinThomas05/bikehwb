@@ -20,7 +20,7 @@ class LikeFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()-value('id') ?? User::factory(),
+            'user_id' => User::inRandomOrder()->value('id') ?? User::factory(),
             'post_id' => Post::inRandomOrder()->value('id') ?? Post::factory(),
         ];
     }
