@@ -33,3 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 });
+
+// Route to add comments to a post (protected by auth middleware)
+Route::middleware('auth')->post(
+    '/posts/{post}/comments', [PostController::class, 'addComment'])->name('posts.addComment');
+// Route to delete comments from a post (protected by auth middleware)
+Route::middleware('auth')->delete(
+    '/comments/{comment}', [PostController::class, 'destroyComment'])->name('comments.destroyComment');

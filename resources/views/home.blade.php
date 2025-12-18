@@ -34,7 +34,7 @@
 <!--Page heading-->
 <h1>Home Page</h1>
 <h2>Post Feed:</h2>
-
+    <!-- Post feed -->
     @foreach ($posts as $post)
         <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
             <!-- Edit/Delete buttons for user -->
@@ -56,8 +56,27 @@
                 <div style="margin-left:20px; padding:5px; border-left:2px solid #aaa;">
                     <p>{{ $comment->body }}</p>
                     <p><em>By {{ $comment->user->name }}</em></p>
+                    @auth
+                    <!-- Comment delete button -->
+                    @if (auth()->id() === $comment->user_id)
+                    <form method="POST" action="{{ route('comments.destroyComment', $comment) }}" >
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                    @endif
+                    @endauth
                 </div>
             @endforeach
+
+            @auth
+            <!-- Comment submission form -->
+            <form method="POST" action="{{ route('posts.addComment', $post) }}" >
+                @csrf
+                <input type="text" name="comment" id="new_comment"  required placeholder="Enter your comment here">
+                <button type="submit">Add</button>
+            </form>
+            @endauth
         </div>
     @endforeach
 

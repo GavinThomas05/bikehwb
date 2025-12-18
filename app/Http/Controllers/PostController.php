@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -85,6 +87,31 @@ class PostController extends Controller
         $post->delete();
 
         return redirect('/')->with('success', 'Post deleted successfully');
+    }
+
+    // Handle comment submission
+    public function addComment(Request $request, Post $post)
+    {
+        $request->validate([
+            'comment' => 'required|string',
+        ]);
+
+        $post->comments()->create([
+            'user_id' => Auth::id(),
+            'post_id' => $post->id,
+            'body' => $request->comment,
+        ]);
+
+        return redirect('/')->with('success', 'Comment added successfully');
+    }
+    // Handle comment deletion
+    public function destroyComment(Comment $comment)
+    {
+        if ($comment->user_id !== Auth::id()) {
+            abort(403);
+        }
+        $comment->delete();
+        return redirect('/')->with('success', 'Comment deleted successfully');
     }
 }
 
