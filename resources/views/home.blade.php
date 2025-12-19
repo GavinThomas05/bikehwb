@@ -43,11 +43,13 @@
                     <a href="{{ route('posts.edit', $post) }}">
                         <button type="button">Edit</button>
                     </a>
-
-                    <!-- ***Delete form moved to withing edit-->
                 @endif
             @endauth
             <h2>{{ $post->title }}</h2>
+            @if ($post->image_path)
+                <img src="{{ asset('storage/' . str_replace('app/public/', '', $post->image_path)) }}" 
+                alt="Post Image" style="max-width:500px; max-height:500px;">
+            @endif  
             <p>{{ $post->body }}</p>
             <p><strong>Author:</strong> {{ $post->user->name }}</p>
 

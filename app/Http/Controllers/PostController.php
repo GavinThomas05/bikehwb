@@ -35,14 +35,24 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'body'  => 'required|string',
+            'image' => 'nullable|image|max:2048', // optional image upload
         ]);
 
-        // Create the post linked to the logged-in user
-        Post::create([
+        $data = [
             'user_id' => Auth::id(),
             'title'   => $request->title,
             'body'    => $request->body,
-        ]);
+        ];
+
+        // Handle image upload if present
+        if ($request->hasFile('image')) {
+            $data['image_path'] = $request->file('image')->store('posts', 'public');
+        }else{
+            $data['image_path'] = null;
+        }
+
+        // Create the post linked to the logged-in user
+        Post::create($data);
 
         return redirect('/')->with('success', 'Post created successfully');
     }
@@ -136,4 +146,5 @@ class PostController extends Controller
 
         return back();
     }
+
 }

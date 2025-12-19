@@ -20,11 +20,14 @@ class CommentTableSeeder extends Seeder
         $posts = Post::all();
         
         foreach ($posts as $post) {
-            // For each post, create a random number of comments between 1 and 5
-            Comment::factory(rand(1, 5))->create([
-                'post_id' => $post->id,
-                'user_id' => $users->random()->id,
-            ]);
+            // Each post gets between 0 to 5 comments with random users
+            $commentCount = rand(0, 5);
+            for ($i = 0; $i < $commentCount; $i++) {
+                Comment::factory()->create([
+                    'post_id' => $post->id,
+                    'user_id' => $users->random()->id,
+                ]);
+            }
         }
     }
 }
