@@ -69,8 +69,23 @@
                 </div>
             @endforeach
 
+            <!-- Like count -->
+            <p><strong>Likes:</strong> {{ $post->likes->count() }}</p>
+
             @auth
+            <!-- Like button -->
+             <form method="POST" action="{{ route('posts.toggleLike', $post) }}">
+                @csrf
+                @if ($post->likes->where('user_id', auth()->id())->count())
+                    <button type="submit">Unlike</button>
+                @else
+                    <button type="submit">Like</button>
+                @endif
+            </form>
+            @endauth
+
             <!-- Comment submission form -->
+             @auth
             <form method="POST" action="{{ route('posts.addComment', $post) }}" >
                 @csrf
                 <input type="text" name="comment" id="new_comment"  required placeholder="Enter your comment here">

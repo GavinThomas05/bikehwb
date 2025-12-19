@@ -40,3 +40,7 @@ Route::middleware('auth')->post(
 // Route to delete comments from a post (protected by auth middleware)
 Route::middleware('auth')->delete(
     '/comments/{comment}', [PostController::class, 'destroyComment'])->name('comments.destroyComment');
+
+// Route to like/unlike a post (protected by auth middleware)
+Route::middleware('auth')->post(
+    '/posts/{post}/like', [PostController::class, 'toggleLike'])->name('posts.toggleLike');

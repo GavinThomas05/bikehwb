@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Like;
 
 
 class PostController extends Controller
@@ -113,5 +114,26 @@ class PostController extends Controller
         $comment->delete();
         return redirect('/')->with('success', 'Comment deleted successfully');
     }
-}
 
+    // Handle like/unlike functionality
+    public function toggleLike(Post $post){
+        $userId = Auth::id();
+
+        $existingLike = Like::where('user_id', $userId)
+            ->where('post_id', $post->id)
+            ->first();
+
+        if ($existingLike) {
+            // Unlike
+            $existingLike->delete();
+        } else {
+            // Like
+            Like::create([
+                'user_id' => $userId,
+                'post_id' => $post->id,
+            ]);
+        }
+
+        return back();
+    }
+}
