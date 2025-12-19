@@ -7,6 +7,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Like;
+use App\Models\User;
 
 
 class PostController extends Controller
@@ -145,6 +146,18 @@ class PostController extends Controller
         }
 
         return back();
+    }
+
+    public function userProfile(User $user)
+    {
+        // Get all posts by this user, newest first
+        $posts = Post::where('user_id', $user->id)->latest()->get();
+
+        // Pass the user and their posts to the view
+        return view('posts.profile', [
+            'user' => $user,
+            'posts' => $posts
+        ]);
     }
 
 }

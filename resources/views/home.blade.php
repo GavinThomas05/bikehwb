@@ -19,7 +19,12 @@
             @csrf
             <button type="submit">Logout</button>
         </form>
+        <!-- Show user profile link -->
+        <a href="{{route('users.profile', auth()->user())}}">
+            <button type="button">Profile</button>
+        </a>
     @endauth
+
     <!-- Show login/register links if not authenticated (Viewing as a guest) -->
     @guest
         <a href="/login">

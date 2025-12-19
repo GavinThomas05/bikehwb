@@ -44,3 +44,6 @@ Route::middleware('auth')->delete(
 // Route to like/unlike a post (protected by auth middleware)
 Route::middleware('auth')->post(
     '/posts/{post}/like', [PostController::class, 'toggleLike'])->name('posts.toggleLike');
+
+// Route to show user profile page
+Route::get('/users/{user}', [PostController::class, 'userProfile'])->name('users.profile');
